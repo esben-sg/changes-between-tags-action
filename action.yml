@@ -84,7 +84,7 @@ runs:
 
         # exit if the latest tag does not match the git ref that triggered the workflow
         if [[ "$validateTag" == "true" && ( "$GITHUB_REF" != "refs/tags/"* || "$GITHUB_REF_NAME" != "$latestTag" ) ]]; then
-          echo "::error title=tags not matching::the latest tag determined by the changes-between-tags action does not match the git ref that triggered the workflow"
+          echo "::error title=tags not matching::the latest tag ($latestTag) determined by the changes-between-tags action does not match the git ref ($GITHUB_REF_NAME) that triggered the workflow"
           exit 1
         fi
 
