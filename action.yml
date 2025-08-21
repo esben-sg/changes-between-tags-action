@@ -67,8 +67,8 @@ runs:
         # fetch all tags from origin
         git fetch origin --tags --force
 
-        # get tags that match the pattern and sort them using version sorting in reverse
-        tags=$(git tag -l | grep -E "$tagPattern" | sort -Vr || echo "")
+        # get tags that match the pattern and exist in the commit history from current HEAD
+        tags=$(git log --decorate=short --simplify-by-decoration --pretty=format:"%D" | grep -o 'tag:[^,]*' | sed 's/tag: //' | grep -E "$tagPattern" || echo "")
 
         # count the found tags
         countTags=$(echo "$tags" | wc -l)
